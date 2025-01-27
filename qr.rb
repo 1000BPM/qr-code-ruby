@@ -3,7 +3,7 @@ require "rqrcode"
 user_input = ""
 
 #menu
-while user_input !=3
+while user_input != "3"
   puts "What kind of QR code would you like to generate?"
   puts ""
   puts "1. Open a URL"
@@ -18,22 +18,27 @@ while user_input !=3
       input_url = gets.chomp
       puts "What would you like to call the PNG?"
       name_png = gets.chomp
-      png = qrcode.as_png({ :size => 500 })
-      to_encode = IO.binwrite("#{name_png}.png", png.to_s)
+      
     elsif user_input == "2"
       puts "What is the phone number you want to code to send a text message to"
-      phone_num = gets.chomp
+      phone_num = gets.chomp.to_i
       puts "What do you want to populate the message with?"
       text_mess = gets.chomp
       puts "What would you like to call the PNG?"
-      name_png = gets.chomp.to_i
+      name_png = gets.chomp
       to_encode = "SMSTO:#{phone_num}:#{text_mess}"
+
     elsif user_input == "3"
       puts "Goodbye!"
     else
       puts "Please select an option from the menu"
-  end
-  qrcode = RQRCode::QRCode.new(to_encode)
+   end
+
+    if user_input == "1" || user_input == "2"
+      qrcode = RQRCode::QRCode.new(to_encode)
+      png = qrcode.as_png({:size => 500})
+      to_encode = IO.binwrite("#{name_png}.png", png.to_s)
+    end
 end
 
 
