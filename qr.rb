@@ -15,7 +15,7 @@ while user_input != "3"
   pp user_input
     if user_input == "1"
       puts "What is the URL you would like to encode?"
-      input_url = gets.chomp
+      to_encode = gets.chomp
       puts "What would you like to call the PNG?"
       name_png = gets.chomp
       
